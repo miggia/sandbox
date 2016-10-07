@@ -1,4 +1,4 @@
-# # sympy multivariate series expansion function
+# sympy multivariate series expansion function
 
 This script provides a compact code for the creation of multivariate series expansions in sympy.
 
