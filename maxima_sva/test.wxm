@@ -10,7 +10,7 @@ file_search_maxima: append(file_search_maxima,[pwd])$
 load("sva.mac")$
 load("two-link-pendulum.mac")$
 display(H);
-display(C);
+trigreduce(factor(C));
 /* [wxMaxima: input   end   ] */
 
 /* Maxima can't load/batch files which end with a comment! */

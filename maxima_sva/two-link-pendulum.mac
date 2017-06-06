@@ -5,18 +5,18 @@ Xtree : makelist(ident(6),i,1,Nb)$                    /* list of tree transforms
 Xup : makelist(0,i,1,Nb)$                             /* list of joint transforms */
 S : makelist(0,i,1,Nb)$                               /* list of joint motion subspaces */
 
-/* construction of a serial manipulator */
-q : makelist(concat(q,ii),ii,1,Nb)$                   /* list of generalized position variables */
-qd : makelist(concat(qd,ii),ii,1,Nb)$                 /* list of generalized velocity variables */
+/* construction of a two link pendulum */
+q : makelist(concat(q,ii),ii,0,Nb-1)$                 /* list of generalized position variables */
+qd : makelist(concat(qd,ii),ii,0,Nb-1)$               /* list of generalized velocity variables */
 v : makelist(zeromatrix(6,1),ii,1,Nb)$                /* list of spatial velocities */
 avp : makelist(zeromatrix(6,1),ii,1,Nb)$              /* list of spatial accelerations */
-l : makelist([concat(l,ii),0,0],ii,1,Nb)$             /* list of links kinemtaic parameters */
-I : makelist(0,ii,1,Nb)$                              /* list of spatial body inertia matrices */
-m : makelist(concat(m,ii),ii,1,Nb)$                   /* list of link masses */
-c : makelist([concat(s,ii),0,0],ii,1,Nb)$            /* list of centre of masses coordinates */
-I3 : makelist(genmatrix(concat(i,jj),3,3),jj,1,Nb)$   /* list of inertia matrices wrt CoM */
+l : makelist([concat(l,ii),0,0],ii,0,Nb-1)$           /* list of links kinemtaic parameters */
+I : makelist(0,ii,0,Nb-1)$                            /* list of spatial body inertia matrices */
+m : makelist(concat(m,ii),ii,0,Nb-1)$                 /* list of link masses */
+c : makelist([concat(s,ii),0,0],ii,0,Nb-1)$           /* list of centre of masses coordinates */
+I3 : makelist(genmatrix(concat(i,jj),3,3),jj,0,Nb-1)$ /* list of inertia matrices wrt CoM */
 
-
+/* build list of matrices defining the kinematic tree */
 Xtree[2] : Xtrans(l[1]);
 
 /* brute force diagonalization of the inertia matrices */
@@ -31,6 +31,7 @@ for ii: 1 thru Nb do
 
 a_grav : ematrix(6,1,g,5,1)$
 
-display(qd)$
+/* create list of zero external forces (one for each body) */
+f_ext : makelist([],ii,1,Nb)$
 
 HandC(Nb,q,Xtree,qd,parent,v,avp,f_ext,a_grav,I)$

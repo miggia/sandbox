@@ -169,15 +169,9 @@ HandC (Nb,q,Xtree,qd,parent,v,avp,f_ext,a_grav,I) := block
       avp[ii] : Xup[ii].avp[parent[ii]] + crm(v[ii]).vJ
     ),
     fvp[ii] : I[ii].avp[ii] + crf(v[ii]).I[ii].v[ii],
-    display(fvp[ii]),
-    display(factor(fvp[ii])),
-    display(trigsimp(factor(fvp[ii]))),
     if f_ext[ii] # [] then
         fvp[ii] : fvp[ii] - f_ext[ii]
   ),
-  /*display(parent),*/
-
-  /*display(a_grav),*/
 
   /* assemble C matrix */
   C : makelist(0,ii,1,Nb),
