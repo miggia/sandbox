@@ -13,14 +13,5 @@ display(H);
 display(C);
 /* [wxMaxima: input   end   ] */
 
-/* [wxMaxima: input   start ] */
-load_pathname;
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: input   start ] */
-load("C:/Users/aparmiggiani/Documents/GitHub/sandbox/maxima_sva/sva.mac")$
-display(wxfilename);
-/* [wxMaxima: input   end   ] */
-
 /* Maxima can't load/batch files which end with a comment! */
 "Created with wxMaxima"$
