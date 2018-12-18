@@ -17,6 +17,7 @@ from scipy.interpolate import interp1d
 from matplotlib import pyplot as plt
 plt.style.use('ggplot')
 
+#%% load and parse input data
 # load Excel file with pandas
 xl = pd.ExcelFile("17-06-15_08mm_cable_traction_test.xlsx")
 # initialize dat matrices list
@@ -40,7 +41,7 @@ for df in dml:
     f = interp1d(df[:,0], df[:,1], bounds_error = False)
     cdm.append(f(xv))
 
-## hand tweaking of data
+#%% hand tweaking of data
 # removing flawed experimental data
 cdm.pop(4)
 cdm.pop(2)
@@ -51,7 +52,7 @@ lpe = 905
 # computation of average behaviour, and standard deviation
 mv, sv = np.nanmean(cdm[:,:lpe], axis=0), np.nanstd(cdm[:,:lpe], axis=0)
 
-## plotting 
+#%% plotting 
 # select plot color
 c = 'C1'
 plt.fill_between(xv[:lpe], mv-sv, mv+sv, 
@@ -63,3 +64,7 @@ for df in cdm:
 plt.legend()
 plt.xlabel('deformation [mm]')
 plt.ylabel('force [N]')
+
+#%% compute approximated derivative
+# (discaring the first 100 sample)
+stf = mv[100:]/xv[100:lpe]
